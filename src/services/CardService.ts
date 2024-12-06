@@ -8,10 +8,9 @@ export const cardApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'https://66f3c66477b5e8897096c67b.mockapi.io/'}),
     tagTypes: ['CARDS'],
     endpoints: (build) => ({
-        getTodos: build.query<IPost[], number>({
-            query: (limit: number = 10) => ({
-                url: '/posts',
-                _params: limit
+        getTodos: build.query<IPost[], void>({
+            query: () => ({
+                url: '/posts'
             }),
             providesTags: result => ['CARDS']  
         }),

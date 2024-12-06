@@ -5,9 +5,9 @@ import FilterCards from './FilterCards';
 
 const CardContainer = () => {
  
-    const {data: cards,isLoading, error  } = cardApi.useGetTodosQuery(10)
+    const {data: cards,isLoading, error  } = cardApi.useGetTodosQuery()
     const {filter} = useAppSelector(state => state.cards)
-    const filterCards = cards?.filter((card) => {
+   const filterCards = cards?.filter((card) => {
       if (filter === 'all') return !card.like
       if(filter === 'favorites') return card.like
     })

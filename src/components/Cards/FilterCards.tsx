@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 import { setFilterCard } from "../../services/CardSlice";
 
 

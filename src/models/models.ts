@@ -1,10 +1,10 @@
 export type FilterValuesType = 'all' | 'favorites' 
 
 export interface IPost {
-    id: string
+    id: string 
     title: string
     body: string
-    date?: string
+    date: string
     avatar?: string | undefined
     like: boolean
     filter: string
