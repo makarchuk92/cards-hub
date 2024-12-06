@@ -10,14 +10,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { cardApi } from '../../services/CardService';
 import { IPost } from '../../models/models';
+import { useNavigate, useParams } from 'react-router';
 
 
 
-type PropsType = {
+export type PropsType = {
   title: string
   body: string
   avatar: string | undefined
-  id: string
+  id: string | undefined
   card: IPost
   isLike: boolean
 }
@@ -25,8 +26,9 @@ type PropsType = {
 const CardList = (props: PropsType) => {
   const [deleteTodo, { }] = cardApi.useDeletePostMutation()
   const [toggleLike, { }] = cardApi.useToggleLikeMutation()
-
-
+  const navigation = useNavigate()
+  
+  
   const handleLike = (post: IPost) => {
     toggleLike({ id: post.id, like: !post.like })
   }
@@ -35,40 +37,50 @@ const CardList = (props: PropsType) => {
     deleteTodo(card)
   }
 
-  return (
-    <Card sx={{ maxWidth: 345,
-     }}>
-      <CardHeader 
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            <img src={props.avatar} alt="" />
-          </Avatar>
-        }
-        title=<h3>{props.title}</h3>
-      />
-      <CardContent  >
-        <Typography
-         variant="body2" sx={{ color: 'text.secondary'}} 
-          onDoubleClick={() => console.log('click')}   
-          >
-          {props.body}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing className='action-buttons'>
-        <IconButton aria-label="add to favorites"
-          onClick={() => handleLike(props.card)}
-        >
-          <FavoriteIcon style={{ color: props.isLike ? 'red' : 'black' }} />
-        </IconButton>
-        <IconButton
-          onClick={() => handleRemoveCard(props.card)}
-          aria-label="delete"
-        >
-          <DeleteIcon fontSize="small" />
-        </IconButton>
-      </CardActions>
+  const handleClickDetails = (id: string) => {
+    navigation(`/products/${id}`)
+  }
 
-    </Card>
+  
+
+  return (
+    <div onClick={() => handleClickDetails(props.card.id)}>
+      <Card
+        sx={{
+          maxWidth: 345,
+        }}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              <img src={props.avatar} alt="" />
+            </Avatar>
+          }
+          title=<h3>{props.title}</h3>
+        />
+        <CardContent>
+          <Typography
+            variant="body2" sx={{ color: 'text.secondary' }}
+            onDoubleClick={() => console.log('click')}
+          >
+            {props.body}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing className='action-buttons'>
+          <IconButton aria-label="add to favorites"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>  {e.stopPropagation(); handleLike(props.card)}}
+          >
+            <FavoriteIcon style={{ color: props.isLike ? 'red' : 'black' }} />
+          </IconButton>
+          <IconButton
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {e.stopPropagation(); handleRemoveCard(props.card)}}
+            aria-label="delete"
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </div>
+
   );
 }
 

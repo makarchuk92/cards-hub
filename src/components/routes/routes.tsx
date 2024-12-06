@@ -1,7 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useParams } from "react-router-dom";
 import App from "../../App";
+import { useAppSelector } from "../../hooks/redux";
 import CardForm from "../CardForm";
 import CardContainer from "../Cards/CardContainer";
+import CardDetails from "../Cards/CardDetails";
 
 
 export const routes = createBrowserRouter([
@@ -11,11 +13,15 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/products',
-                element: <CardContainer />
+                element: <CardContainer  />
             },
             {
                 path: '/create-product',
                 element: <CardForm />
+            },
+            {
+                path: '/products/:id',
+                element: <CardDetails />
             }
         ]
     }
