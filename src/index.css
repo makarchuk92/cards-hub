@@ -51,3 +51,7 @@ code {
   display: flex;
   justify-content: space-between;
 }
+.center-text {
+  justify-content: center !important;
+  text-align: center !important;
+}

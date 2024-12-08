@@ -1,7 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router'
 import { useAppSelector } from '../../hooks/redux'
-import { IPost } from '../../models/models'
 import { cardApi } from '../../services/CardService'
 
 
@@ -10,7 +9,9 @@ import { cardApi } from '../../services/CardService'
 const CardDetails = () => {
 
   const { id } = useParams()
-  const { data: posts } = cardApi.useGetTodosQuery()
+  const { data: posts } = cardApi.useGetCardsQuery()
+  const {cards} = useAppSelector(state => state.cards)
+
 
   const cardId = posts?.find((card) => card.id === id)
 
@@ -21,8 +22,6 @@ const CardDetails = () => {
           <h3>Date: {cardId.date}</h3>
           <p>{cardId.body}</p>
         </React.Fragment>
-
-
       ) : (
         <p>not found</p>)
       }

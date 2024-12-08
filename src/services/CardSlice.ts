@@ -4,7 +4,7 @@ import { FilterValuesType, IPost } from "../models/models";
 
 
 
-interface CardsState {
+export interface CardsState {
     cards: IPost[]
     filter: FilterValuesType
     body: string

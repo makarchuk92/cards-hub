@@ -1,18 +1,19 @@
-import { Button, TextField } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
-import { IPost } from '../models/models';
-import { cardApi } from '../services/CardService';
+import { Button, TextField } from '@mui/material'
+import { IPost } from '../../models/models';
+import { cardApi } from '../../services/CardService';
 
 
 const CardForm = () => {
     const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [addPost, {}] = cardApi.useAddTodoMutation()
+  const [addPost, {}] = cardApi.useAddCardMutation()
    
 
-  const addNewCard = async() => {
+
+  const addNewCard = () => {
     if(inputValue.trim()) {
-      await addPost({title: inputValue} as IPost)
+      addPost({title: inputValue} as IPost)
       setInputValue('')
     } else {
       setError('Field is required')

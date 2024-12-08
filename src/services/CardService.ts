@@ -3,18 +3,20 @@ import { IPost } from '../models/models'
 
 
 
+
+
 export const cardApi = createApi({
     reducerPath: 'cardApi',
     baseQuery: fetchBaseQuery({baseUrl: 'https://66f3c66477b5e8897096c67b.mockapi.io/'}),
     tagTypes: ['CARDS'],
     endpoints: (build) => ({
-        getTodos: build.query<IPost[], void>({
+        getCards: build.query<IPost[], void>({
             query: () => ({
                 url: '/posts'
             }),
             providesTags: result => ['CARDS']  
         }),
-        addTodo: build.mutation<IPost, IPost>({
+        addCard: build.mutation<IPost, IPost>({
             query: (action) => ({
                 url: '/posts',
                 method: 'POST',
@@ -22,7 +24,7 @@ export const cardApi = createApi({
             }),
             invalidatesTags: ['CARDS']
         }),
-        deletePost: build.mutation<IPost, IPost>({
+        deleteCard: build.mutation<IPost, IPost>({
             query: (post) => ({
                 url: `/posts/${post.id}`,
                 method: 'DELETE',
@@ -37,14 +39,24 @@ export const cardApi = createApi({
                 body: {like}
             }),
             invalidatesTags: ['CARDS']
+        }),
+        updateCard: build.mutation<IPost, IPost>({
+            query: (post) => ({
+                url: `/posts/${post.id}`,
+                method: 'PUT',
+                body: post
+            }),
+            invalidatesTags: ['CARDS']
         })
+       
         
         })
 })
 
 export const {
-    useGetTodosQuery, 
-    useAddTodoMutation, 
-    useDeletePostMutation, 
-    useToggleLikeMutation
+    useGetCardsQuery, 
+    useAddCardMutation,  
+     useDeleteCardMutation,
+    useToggleLikeMutation,
+    useUpdateCardMutation
 } = cardApi

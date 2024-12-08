@@ -4,7 +4,9 @@ import Navbar from './components/Navbar/Navbar';
 import { Outlet } from 'react-router';
 
 
+
 function App() {
+
   return (
     <React.Fragment>
       <Navbar />
