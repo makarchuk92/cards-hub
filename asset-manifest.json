@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/card-hub/static/css/main.5a9e8984.css",
-    "main.js": "/card-hub/static/js/main.ed9f6e23.js",
-    "index.html": "/card-hub/index.html",
-    "main.5a9e8984.css.map": "/card-hub/static/css/main.5a9e8984.css.map",
-    "main.ed9f6e23.js.map": "/card-hub/static/js/main.ed9f6e23.js.map"
+    "main.css": "/cards-hub/static/css/main.5a9e8984.css",
+    "main.js": "/cards-hub/static/js/main.ed9f6e23.js",
+    "index.html": "/cards-hub/index.html",
+    "main.5a9e8984.css.map": "/cards-hub/static/css/main.5a9e8984.css.map",
+    "main.ed9f6e23.js.map": "/cards-hub/static/js/main.ed9f6e23.js.map"
   },
   "entrypoints": [
     "static/css/main.5a9e8984.css",
