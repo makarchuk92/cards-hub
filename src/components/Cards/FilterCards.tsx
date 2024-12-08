@@ -1,21 +1,20 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setFilterCard } from "../../services/CardSlice";
 
 
-type PropsType = {
-    filter: string
-}
 
 
-const FilterCards = (props: PropsType) => {
+
+const FilterCards = () => {
+  const {filter} = useAppSelector(state => state.cards)
   const dispatch = useAppDispatch();
   
   return (
     <div className="filter-btn">
       <Button
-        className={props.filter === 'all' ? 'active-filter' : ""}
+        className={filter === 'all' ? 'active-filter' : ""}
         variant="contained"
         color="primary"
         size="small"
@@ -24,7 +23,7 @@ const FilterCards = (props: PropsType) => {
         All
       </Button>
       <Button
-         className={props.filter === 'favorites' ? 'active-filter' : ""}
+         className={filter === 'favorites' ? 'active-filter' : ""}
         variant="contained"
         color="primary"
         size="small"

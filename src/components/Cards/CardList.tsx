@@ -10,7 +10,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { cardApi } from '../../services/CardService';
 import { IPost } from '../../models/models';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
+import { Button } from '@mui/material';
 
 
 
@@ -24,8 +25,9 @@ export type PropsType = {
 }
 
 const CardList = (props: PropsType) => {
-  const [deleteTodo, { }] = cardApi.useDeletePostMutation()
+  const [deleteTodo, { }] = cardApi.useDeleteCardMutation()
   const [toggleLike, { }] = cardApi.useToggleLikeMutation()
+  const [updateCard, {}] = cardApi.useUpdateCardMutation()
   const navigation = useNavigate()
   
   
@@ -41,6 +43,13 @@ const CardList = (props: PropsType) => {
     navigation(`/products/${id}`)
   }
 
+  const handleUpdateCard = () => {
+    const body = prompt() || ''
+    if(body) {
+      updateCard({...props.card, body})
+    }
+    
+  }
   
 
   return (
@@ -62,13 +71,25 @@ const CardList = (props: PropsType) => {
             variant="body2" sx={{ color: 'text.secondary' }}
             onDoubleClick={() => console.log('click')}
           >
-            {props.body}
+             
+            <Button
+            className="btn"
+            variant="outlined"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {e.stopPropagation(); handleUpdateCard()}}
+            color="primary"
+            size="small"
+          >
+            Edit
+          </Button>
+           
+              {props.body}
+          
+            
           </Typography>
         </CardContent>
         <CardActions disableSpacing className='action-buttons'>
           <IconButton aria-label="add to favorites"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>  {e.stopPropagation(); handleLike(props.card)}}
-          >
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>  {e.stopPropagation(); handleLike(props.card)}}>
             <FavoriteIcon style={{ color: props.isLike ? 'red' : 'black' }} />
           </IconButton>
           <IconButton
